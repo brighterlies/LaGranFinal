@@ -27,7 +27,6 @@ class ProductFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentProductBinding.inflate(inflater, container, false)
-        //productAdapter.connectApiToAdapter()
         getProducts()
         startRecyclerView()
         setupProductDetailNavigation()

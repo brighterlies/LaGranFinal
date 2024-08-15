@@ -32,9 +32,12 @@ class ProductDetailFragment : Fragment() {
     private fun getProductData(id: Int) {
         lifecycleScope.launch {
             if (id != -1) {
-                productDetailViewModel.getProductById(id)
-                println("Product ID: $id")
-               // connectApiToAdapter(id)
+                val productUI = productDetailViewModel.getProductById(id)
+                if (productUI != null) {
+                    updateUI(productUI)
+                } else {
+                    println("Error: Product data is null")
+                }
             } else {
                 println("Error: Product ID is invalid")
             }
@@ -50,35 +53,6 @@ class ProductDetailFragment : Fragment() {
         binding.countProduct.text = "Count: ${product.count}"
         Picasso.get().load(product.url).into(binding.imgProduct)
     }
-
-    /*private fun connectApiToAdapter(id: Int) {
-        val call = ApiClient.getProduct.getProductById(id)
-        call.enqueue(object : Callback<Product> {
-            override fun onResponse(call: Call<Product>, response: Response<Product>) {
-                if (response.isSuccessful) {
-                    val product = response.body()
-                    if (product != null) {
-                        binding.nameProduct.text = product.title
-                        binding.priceProduct.text = "Price: $${product.price}"
-                        binding.descriptionProduct.text = product.description
-                        binding.categoryProduct.text = product.category
-                        //binding.ratingProduct.text = "Rating: ${product.rating.rate}"
-                        //binding.countProduct.text = "Count: ${product.rating.count}"
-                        Picasso.get().load(product.url).into(binding.imgProduct)
-                    } else {
-                        println("Error: Product data is null")
-                    }
-                } else {
-                    println("Error: ${response.code()}")
-                }
-            }
-
-            override fun onFailure(call: Call<Product>, t: Throwable) {
-                println("Error: ${t.message}")
-            }
-        })
-    }
-     */
 
     override fun onDestroyView() {
         super.onDestroyView()
