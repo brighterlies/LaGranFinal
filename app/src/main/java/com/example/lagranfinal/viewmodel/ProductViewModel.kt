@@ -2,7 +2,6 @@ package com.example.lagranfinal.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.lagranfinal.data.model.Product
 import com.example.lagranfinal.data.repository.ProductRepositoryImp
 

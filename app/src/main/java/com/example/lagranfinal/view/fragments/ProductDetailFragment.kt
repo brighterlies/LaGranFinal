@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.lagranfinal.R
 import com.example.lagranfinal.data.model.Product
 import com.example.lagranfinal.databinding.FragmentProductDetailBinding
 import com.example.lagranfinal.viewmodel.ProductViewModel
@@ -18,6 +19,7 @@ class ProductDetailFragment : Fragment() {
     private var _binding: FragmentProductDetailBinding? = null
     private val binding get() = _binding!!
     private val productDetailViewModel: ProductViewModel by activityViewModels()
+    private val productFragment = ProductFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +28,7 @@ class ProductDetailFragment : Fragment() {
         val productId = arguments?.getInt("productId", -1) ?: -1
         _binding = FragmentProductDetailBinding.inflate(inflater, container, false)
         getProductData(productId)
+        backButton()
         return binding.root
     }
 
@@ -52,6 +55,19 @@ class ProductDetailFragment : Fragment() {
         binding.ratingProduct.text = "Rating: ${product.rate}"
         binding.countProduct.text = "Count: ${product.count}"
         Picasso.get().load(product.url).into(binding.imgProduct)
+    }
+
+    private fun backButton() {
+        binding.imgBtnBack.setOnClickListener {
+            setCurrentFragment(productFragment)
+        }
+    }
+
+    private fun setCurrentFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentContainer, fragment)
+            commit()
+        }
     }
 
     override fun onDestroyView() {
