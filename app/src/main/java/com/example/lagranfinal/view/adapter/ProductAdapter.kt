@@ -43,28 +43,4 @@ class ProductAdapter(
         products = productsResponse
         notifyDataSetChanged()
     }
-
-    /*
-    fun connectApiToAdapter() {
-        val call = ApiClient.getProduct.getProducts()
-        call.enqueue(object : Callback<List<Product>> {
-            override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
-                if (response.isSuccessful) {
-                    val productList = response.body()
-                    if (productList != null) {
-                        setListProducts(productList)
-                    } else {
-                        println("Error: Product list is null")
-                    }
-                } else {
-                    println("Error in Response: ${response.code()}")
-                }
-            }
-
-            override fun onFailure(call: Call<List<Product>>, t: Throwable) {
-                println("Error: ${t.message}")
-            }
-        })
-    }
-    */
 }

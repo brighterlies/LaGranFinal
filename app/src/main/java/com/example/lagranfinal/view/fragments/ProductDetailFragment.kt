@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.lagranfinal.data.model.Product
 import com.example.lagranfinal.databinding.FragmentProductDetailBinding
 import com.example.lagranfinal.viewmodel.ProductViewModel
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
 class ProductDetailFragment : Fragment() {
@@ -31,11 +33,22 @@ class ProductDetailFragment : Fragment() {
         lifecycleScope.launch {
             if (id != -1) {
                 productDetailViewModel.getProductById(id)
+                println("Product ID: $id")
                // connectApiToAdapter(id)
             } else {
                 println("Error: Product ID is invalid")
             }
         }
+    }
+
+    private fun updateUI(product: Product) {
+        binding.nameProduct.text = product.title
+        binding.priceProduct.text = "Price: $${product.price}"
+        binding.descriptionProduct.text = product.description
+        binding.categoryProduct.text = product.category
+        binding.ratingProduct.text = "Rating: ${product.rate}"
+        binding.countProduct.text = "Count: ${product.count}"
+        Picasso.get().load(product.url).into(binding.imgProduct)
     }
 
     /*private fun connectApiToAdapter(id: Int) {

@@ -14,13 +14,14 @@ class ProductRepositoryImp: ProductRepository {
 
     override suspend fun getProducts(): List<Product> {
         return withContext(Dispatchers.IO) {
-            val productFromDatabase = LaGranFinal.database.productDao().getAll()
+            var productFromDatabase = LaGranFinal.database.productDao().getAll()
             if (productFromDatabase.isEmpty()){
                 val productFromApi = getProductsApi()
                 productFromApi?.forEach {
                     LaGranFinal.database.productDao().insertProduct(it.toEntity())
                 }
                 productFromApi ?: emptyList()
+                productFromDatabase = LaGranFinal.database.productDao().getAll()
             }
             println(productFromDatabase)
             productEntityListToProductList(productFromDatabase)

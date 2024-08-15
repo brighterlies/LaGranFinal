@@ -12,8 +12,6 @@ import retrofit2.http.Path
 interface ProductsInterface {
     @GET("products")
     fun getProducts(): Call<List<ProductResponse>>
-    @GET("products/{id}")
-    fun getProductById(@Path("id") id: Int): Call<ProductResponse>
 }
 
 object ApiClient {

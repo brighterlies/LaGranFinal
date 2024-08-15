@@ -22,6 +22,11 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+        login()
+        return binding.root
+    }
+
+    private fun login() {
         binding.btnEnter.setOnClickListener {
             val email = binding.emailInput.text.toString()
             val pass = binding.passInput.text.toString()
@@ -33,7 +38,6 @@ class LoginFragment : Fragment() {
                 Toast.makeText(requireContext(), "Wrong Email or Pass", Toast.LENGTH_LONG).show()
             }
         }
-        return binding.root
     }
 
     private fun setCurrentFragment(fragment: Fragment) {

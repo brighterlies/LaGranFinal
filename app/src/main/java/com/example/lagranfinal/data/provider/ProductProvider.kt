@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.example.lagranfinal.data.database.ProductDatabase
 
 class ProductProvider {
-    val PRODUCT_DATABASE_NAME = "product-db"
+    private val PRODUCT_DATABASE_NAME = "product-db"
 
     fun providerRoom(context: Context): ProductDatabase {
         return Room.databaseBuilder(context, ProductDatabase::class.java, PRODUCT_DATABASE_NAME)
